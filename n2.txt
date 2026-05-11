@@ -1,0 +1,36 @@
+🚦 Smart Traffic Light System — Code Explanation
+1. Function Signature
+python
+def traffic_light_controller(current_signal: str, is_emergency_vehicle_approaching: bool) -> str:
+Defines a function with two parameters:
+current_signal — a string representing the traffic light state
+is_emergency_vehicle_approaching — a boolean flag for emergency vehicles
+Returns a str — the traffic instruction
+2. Emergency Check (Priority Logic)
+python
+if is_emergency_vehicle_approaching:
+    return "IMMEDIATE GREEN"
+This runs first, before anything else
+If an emergency vehicle is detected, we immediately return "IMMEDIATE GREEN" — no matter what the current signal is
+This is called early return / short-circuit logic
+3. Switch Statement (match/case)
+python
+match current_signal:
+    case "RED":
+        return "STOP"
+    case "YELLOW":
+        return "PREPARE TO STOP"
+    case "GREEN":
+        return "GO"
+    case _:
+        return "INVALID SIGNAL"
+match/case is Python 3.10+'s equivalent of a switch statement
+Each case checks the value of current_signal
+case _: is the default/wildcard — catches anything that doesn't match "RED", "YELLOW", or "GREEN"
+4. Main Block
+python
+if __name__ == "__main__":
+Ensures test cases only run when the file is executed directly, not when imported as a module
+This is a Python best practice
+💬 How to say it in an interview:
+"I defined a function that accepts the current signal as a string and a boolean for emergency status. The emergency check is placed first as a priority gate — if true, it returns 'IMMEDIATE GREEN' immediately using early return. Otherwise, I used Python's match/case statement, which is the modern switch equivalent, to map each valid signal to its output. The wildcard case _ handles any unexpected input gracefully by returning 'INVALID SIGNAL'."
